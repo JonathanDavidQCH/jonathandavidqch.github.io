@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {
+    background-color:white; 
+    
+}
+</style>
+</head>
+<body>
+
+
+
+<img id="icon">
+
+<script>
+var apiKey = "618298c55522d5446d26bb077c6b9b04";
+var lat = "-1.5922898";
+var lon = "-79.0015614";
+var url = "http://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon + "&appid=" + apiKey;
+
+function updateIcon() {
+  fetch(url)
+    .then(response => response.json())
+    .then(data => {
+      document.getElementById('icon').src = "http://openweathermap.org/img/wn/" + data.weather[0].icon + ".png";
+    })
+    .catch(error => console.log('Error:', error));
+}
+
+// Actualiza el icono del clima cada minuto
+setInterval(updateIcon, 1000); // 60000 milisegundos son 1 minuto
+</script>
+
+</body>
+</html>
